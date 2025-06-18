@@ -28,6 +28,9 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
+
+
+
             public static List<Course> GetAllCourses()
             {
                 var courses = new List<Course>();
