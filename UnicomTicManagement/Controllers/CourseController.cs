@@ -30,10 +30,17 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
+<<<<<<< HEAD
         public List<Course> GetAllCourses()
         {
             List<Course> courses = new List<Course>();
             using (var conn = DataConnect.GetConnection())
+=======
+
+
+
+            public static List<Course> GetAllCourses()
+>>>>>>> 6a4705a81b1d9514294d7a99dee4d303364a295c
             {
                 conn.Open();
                 string query = "SELECT * FROM Course";

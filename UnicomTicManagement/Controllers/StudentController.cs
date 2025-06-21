@@ -11,6 +11,7 @@ using UnicomTicManagement.Models;
 using static System.Resources.ResXFileRef;
 
 namespace UnicomTicManagement.Controllers
+    ///Student Name Add method////////
 {
     public class StudentController
     {
