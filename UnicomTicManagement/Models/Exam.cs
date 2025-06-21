@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace UnicomTicManagement.Models
 {
-    public class Exam
+    public  class Exam
     {
-        public int EId { get; set; }
-        public string EName { get; set; }    
+        public int ExId { get; set; }
+        public string ExName { get; set; }
+
+       public int SuId { get; set; } // Foreign key
+        public string SuName { get; set; }
+
     }
 }

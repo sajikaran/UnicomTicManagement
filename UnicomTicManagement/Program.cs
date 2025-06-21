@@ -12,14 +12,14 @@ namespace UnicomTicManagement
         [STAThread]
         static void Main()
         {
-            {
-                {
-                    DataMigration.CreateTable();
+            
+                
+                    DataMigration.createTable();
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new MainForm());
-                }
-            }
+                
+            
         }
     }
 

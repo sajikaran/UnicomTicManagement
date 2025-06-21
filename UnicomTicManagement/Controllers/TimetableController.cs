@@ -4,67 +4,50 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 using UnicomTicManagement.Data;
 using UnicomTicManagement.Models;
 
 namespace UnicomTicManagement.Controllers
 {
-    public class RoomController
+    public  class TimetableController
     {
-
-        public void AddRoom(Room room)
+        public void AddTimeSlot(TimeTable timeTable)
         {
             using (var conn = DataConnect.GetConnection())
             {
-                
                 conn.Open();
-                string query = "INSERT INTO Room (RName, TId,SuId) VALUES (@SuName, @TId,@SuId)";
+                string query = "INSERT INTO TimeTable (TimeSlot) VALUES (@TimeSlot)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@RNmae", room.RName);
-                    cmd.Parameters.AddWithValue("@TId", room.TId);
-                    cmd.Parameters.AddWithValue("@SuId", room.SuId);
+                    cmd.Parameters.AddWithValue("@TimeSlot", timeTable.TimeSlot);
                     cmd.ExecuteNonQuery();
                 }
-
             }
         }
 
 
-        public List<Room> GetAllRooms()
+        public List<TimeTable> GetAllTimeSlots()
         {
-
-
-            var room = new List<Room>();
-
+            List<TimeTable> timeTables = new List<TimeTable>();
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "SELECT RId, RName, TId,SuId FROM Room";
-
+                string query = "SELECT * FROM TimeTable";
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        room.Add(new Room
+                        timeTables.Add(new TimeTable
                         {
-                            RId= reader.GetInt32(0),
-                            RName = reader.GetString(1),
-                            TId = reader.GetInt32(2),
-                            SuId= reader.GetInt32(3)
-
+                            TId = reader.GetInt32(0),
+                            TimeSlot = reader.GetString(1)
                         });
                     }
                 }
             }
-
-            return room;
-
+            return timeTables;
         }
-
 
     }
 }

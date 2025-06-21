@@ -10,5 +10,17 @@ namespace UnicomTicManagement.Models
     {
         public int MId { get; set; }
         public int Marks { get; set; }
+
+        public int StId { get; set; }
+        public string StName { get; set; }
+
+        public int SuId { get; set; }
+        public string SuName { get; set; }
+
+        public int ExId { get; set; }
+        public string ExName { get; set; }
+
     }
+    
+  
 }

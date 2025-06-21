@@ -10,6 +10,9 @@ namespace UnicomTicManagement.Models
     {
         public int  CId { get; set; }
         public string CName { get; set; }
+
+
+        public int SuId { get; set; }
       
     }
 }

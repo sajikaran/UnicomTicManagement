@@ -9,7 +9,14 @@ namespace UnicomTicManagement.Models
     public class Room
     {
         public int RId { get; set; }
-        public string RType { get; set; }
+        public string RName { get; set; }
+
+        public int TId { get; set; }
+
+        public string TimeSlot { get; set; }
+
+        public int SuId { get; set; }
+        public string SuName { get; set; }
 
     }
 }

@@ -9,9 +9,11 @@ namespace UnicomTicManagement.Models
    public class Subject
     {
         public int SuId { get; set; }
-        public string  SuName { get; set; }
+        public string SuName { get; set; }
+        public int CId { get; set; } // Foreign key
+        public string  CName { get; set; } // Navigation property
 
-        
+
 
 
 

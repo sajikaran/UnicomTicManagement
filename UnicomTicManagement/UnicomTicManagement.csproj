@@ -57,7 +57,7 @@
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\TimetableControllercs.cs" />
+    <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Data\DataMigration.cs" />
     <Compile Include="Data\DataConnect.cs" />
     <Compile Include="MainForm.cs">
@@ -75,6 +75,9 @@
     <Compile Include="Models\TimeTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\CourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,23 +90,29 @@
     <Compile Include="Views\ExamForm.Designer.cs">
       <DependentUpon>ExamForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\RoomForm1cs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RoomForm1cs.Designer.cs">
+      <DependentUpon>RoomForm1cs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\SubjectForm.Designer.cs">
       <DependentUpon>SubjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MarkForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\MarkForm.Designer.cs">
-      <DependentUpon>MarkForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MarkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MarkForm.Designer.cs">
+      <DependentUpon>MarkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\TimeTableForm.cs">
       <SubType>Form</SubType>
@@ -129,19 +138,24 @@
     <EmbeddedResource Include="Views\ExamForm.resx">
       <DependentUpon>ExamForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\RoomForm1cs.resx">
+      <DependentUpon>RoomForm1cs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SubjectForm.resx">
+      <DependentUpon>SubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MarkForm.resx">
       <DependentUpon>MarkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SubjectForm.resx">
-      <DependentUpon>SubjectForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\TimeTableForm.resx">
       <DependentUpon>TimeTableForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataCollection.db" />
     <None Include="packages.config" />
+    <None Include="Unicom TIC assignment Report\UniComTicStudents  Management.docx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -151,13 +165,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="unicomtic.db" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
