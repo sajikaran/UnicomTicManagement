@@ -11,7 +11,7 @@ namespace UnicomTicManagement.Controllers
 {
     public class SubjectController
     {
-        // Add a new Subject
+        
         public void AddSubject(Subject subject)
         {
             using (var conn = DataConnect.GetConnection())
@@ -27,7 +27,7 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
-        // Get all subjects
+        
         public List<Subject> GetAllSubjects()
         {
             var subjects = new List<Subject>();

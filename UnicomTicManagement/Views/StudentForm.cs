@@ -88,7 +88,7 @@ namespace UnicomTicManagement.Views
                 return;
             }
 
-            // Now call UsersController to create user
+            
             if (usersController.CreateStudentUser(studentName, newStudentId, out string username, out string password))
             {
                 MessageBox.Show($"Student added!\nUsername: {username}\nPassword: {password}", "Success");
@@ -154,10 +154,10 @@ namespace UnicomTicManagement.Views
         {
             CourseController courseController = new CourseController();
             var courses = courseController.GetAllCourses();
-            // Bind the courses to the combo box
+            
             txtcompobox.DataSource = courses;
-            txtcompobox.DisplayMember = "CName"; // Display name in the combo box
-            txtcompobox.ValueMember = "CId"; // Use CId as value
+            txtcompobox.DisplayMember = "CName"; 
+            txtcompobox.ValueMember = "CId"; 
         }
 
         private void textStName_TextChanged(object sender, EventArgs e)
@@ -180,19 +180,19 @@ namespace UnicomTicManagement.Views
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Get the selected StId from the first selected row
+                
                 int selectedStId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Id"].Value);
 
-                // Optional: Confirm before delete
+                
                 var confirmResult = MessageBox.Show("Are you sure to delete this student?", "Confirm Delete", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Call the delete method from StudentController
+                   
                     StudentController controller = new StudentController();
                     controller.DeleteStudent(selectedStId);
 
-                    // Refresh the DataGridView
-                    LoadStudents(); // Make sure you have a method that reloads the data
+                    
+                    LoadStudents(); 
                 }
             }
             else

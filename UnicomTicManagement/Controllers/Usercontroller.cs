@@ -83,35 +83,35 @@ namespace UnicomTicManagement.Controllers
             }
         }
         public bool CreateStaffUser(string staffName, int staffId, out string username, out string password)
+{
+        username = staffName.ToLower().Replace(" ", "") + staffId;
+        password = "staff" + staffId;
+
+        try
         {
-            username = staffName.ToLower().Replace(" ", "") + staffId;
-            password = "staff" + staffId;
-
-            try
+            using (SQLiteConnection conn = DataConnect.GetConnection())
             {
-                using (SQLiteConnection conn = DataConnect.GetConnection())
+                conn.Open();
+                string insertQuery = @"
+                    INSERT INTO Users (Username, Password, Role, StId)
+                    VALUES (@Username, @Password, 'Staff', NULL);";
+
+                using (var cmd = new SQLiteCommand(insertQuery, conn))
                 {
-                    conn.Open();
-                    string insertQuery = @"
-                INSERT INTO Users (Username, Password, Role, StId)
-                VALUES (@Username, @Password, 'Staff', NULL);";
-
-                    using (var cmd = new SQLiteCommand(insertQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@Password", password);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    return true;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    cmd.ExecuteNonQuery();
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error creating staff user: " + ex.Message);
-                return false;
+
+                return true;
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error creating staff user: " + ex.Message);
+            return false;
+        }
+    }
 
 
 

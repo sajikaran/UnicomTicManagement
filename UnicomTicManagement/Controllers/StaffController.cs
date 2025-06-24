@@ -13,7 +13,7 @@ namespace UnicomTicManagement.Controllers
     public class StaffController
     {
 
-        public void AddStaff(  Staff staff)
+        public void AddStaff(Staff staff)
         {
             using (var conn = DataConnect.GetConnection())
             {
@@ -23,6 +23,28 @@ namespace UnicomTicManagement.Controllers
                 {
                     cmd.Parameters.AddWithValue("@CName", staff.StaffName);
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public int AddStaffAndReturnId(Staff staff)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = @"
+                INSERT INTO Staff(StaffName)
+                VALUES (@StaffName);
+                SELECT last_insert_rowid();"; // gets the auto-increment ID
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StaffName", staff.StaffName);
+                   
+
+                    object result = cmd.ExecuteScalar();
+                    return Convert.ToInt32(result);
                 }
             }
         }
@@ -53,26 +75,7 @@ namespace UnicomTicManagement.Controllers
             return staff;
         }
 
-        public string GetStaffNameById(int StaffId)
-        {
-            using (var conn = DataConnect.GetConnection())
-            {
-                conn.Open();
-                string query = "SELECT StaffName FROM Staff WHERE StaffId = @StaffId";
-                using (var cmd = new SQLiteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@StaffId", StaffId);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return reader.GetString(0); // CName
-                        }
-                    }
-                }
-            }
-            return null; // Or return an empty string or a message like "Course not found"
-        }
+      
         public void DeleteCourse(int StaffId)
         {
             using (var conn = DataConnect.GetConnection())

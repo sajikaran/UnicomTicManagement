@@ -157,7 +157,7 @@ namespace UnicomTicManagement.Views
             CourseController courseController = new CourseController();
             Course course = new Course
             {
-                CId = selectedCourseId,     // ✅ You must include the course ID for update
+                CId = selectedCourseId,     
                 CName = updatedName
             };
 

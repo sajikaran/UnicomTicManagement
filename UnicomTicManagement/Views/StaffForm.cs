@@ -17,89 +17,78 @@ namespace UnicomTicManagement.Views
         public StaffForm()
         {
             InitializeComponent();
-        }
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-            //if (dataGridView1.CurrentRow == null)
-            //{
-            //    MessageBox.Show("Select a staff to delete.");
-            //    return;
-            //}
-
-            //int staffId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["StaffId"].Value);
-
-            //DialogResult confirm = MessageBox.Show("Are you sure to delete?", "Confirm", MessageBoxButtons.YesNo);
-            //if (confirm == DialogResult.Yes)
-            //{
-                //    StaffController controller = new StaffController();
-                //    controller.DeleteStaff(staffId);
-                //    MessageBox.Show("Staff deleted.");
-                //    LoadStaff();
-                //}
-            //}
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            LoadStaff();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //    string staffName = textBox3.Text.Trim();
-            //    if (string.IsNullOrWhiteSpace(staffName))
-            //    {
-            //        MessageBox.Show("Please enter Staff name.");
-            //        return;
-            //    }
 
-            //    StaffController controller = new StaffController();
-            //    Staffz
+            string staffName = textBox1.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(staffName))
+            {
+                MessageBox.Show("Please enter staff name.");
+                return;
+
+            }
+
+            Staff staff = new Staff
+            {
+                StaffName = staffName,
+
+            };
+
+            StaffController staffcontroller = new StaffController();
+            int newStaffId = staffcontroller.AddStaffAndReturnId(staff);
+
+            if (newStaffId <= 0)
+            {
+                MessageBox.Show("Failed to add staff.");
+                return;
+            }
 
 
-            //    if (newStaffId <= 0)
-            //    {
-            //        MessageBox.Show("Failed to add staff.");
-            //        return;
-            //    }
+            Usercontroller userController = new Usercontroller();
+            if (userController.CreateLecturerUser(staffName, newStaffId, out string username, out string password))
+            {
 
-            //    Usercontroller userCtrl = new Usercontroller();
-            //    if (userCtrl.CreateStaffUser(staffName, newStaffId, out string username, out string password))
-            //    {
-            //        MessageBox.Show($"Staff Added!\nUsername: {username}\nPassword: {password}", "Success");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Staff added, but user account creation failed.");
-            //    }
+                MessageBox.Show($"Lecturer added!\nUsername: {username}\nPassword: {password}");
+            }
+            else
+            {
+                MessageBox.Show("   Staff added, but user account creation failed.");
+            }
 
-            //    LoadStaff(); // Reload grid
-            //    textBox3.Clear();
-            //}
 
-            //private void button3_Click(object sender, EventArgs e)
-            //{
-            //    if (dataGridView1.CurrentRow == null)
-            //    {
-            //        MessageBox.Show("Select a staff to update.");
-            //        return;
-            //    }
+            textBox1.Text = "";
+            LoadStaff();
 
-            //    int staffId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["StaffId"].Value);
-            //    string staffName = textBox3.Text.Trim();
 
-            //    if (string.IsNullOrWhiteSpace(staffName))
-            //    {
-            //        MessageBox.Show("Enter staff name.");
-            //        return;
-            //    }
-
-            //    Staff updated = new Staff { StaffId = staffId, StaffName = staffName };
-            //    StaffController controller = new StaffController();
-            //    controller.UpdateStaff(updated);
-            //    MessageBox.Show("Staff updated.");
-            //    LoadStaff();
-            //}
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+        }
+
+
+        private void LoadStaff()
+        {
+
+
+            StaffController  staffcontroller = new StaffController();
+            var staffList = staffcontroller.GetAllStaff();
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = staffList;
+
+            dataGridView1.Columns["StaffId"].HeaderText = "staff id";
+            dataGridView1.Columns["StaffName"].HeaderText = "staff name";
+
+
+        }
+
     }
 }
+

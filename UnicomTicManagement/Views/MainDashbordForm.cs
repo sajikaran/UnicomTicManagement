@@ -43,6 +43,9 @@ namespace UnicomTicManagement.Views
                     
                     button4.Visible = false;
                     button6.Visible = false;
+                    button8.Visible = false; 
+                    button9.Visible = false;
+
 
                     break;
 
@@ -55,6 +58,8 @@ namespace UnicomTicManagement.Views
                     
                     button4.Visible = false;
                     button6.Visible = false;
+                    button8.Visible = false;
+                    button9.Visible = false;
 
                     break;
 
@@ -66,7 +71,8 @@ namespace UnicomTicManagement.Views
                     button5.Enabled = false;
                     button6.Visible = false;
                     button7.Enabled = false;
-                    ;
+                    button8.Visible = false;
+                    button9.Visible = false;
                     break;
             }
 
@@ -171,6 +177,15 @@ namespace UnicomTicManagement.Views
 
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

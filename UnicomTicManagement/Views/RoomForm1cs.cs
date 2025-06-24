@@ -210,5 +210,10 @@ namespace UnicomTicManagement.Views
         {
 
         }
+
+        private void RoomForm1cs_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -87,7 +87,8 @@ namespace UnicomTicManagement.Views
             Usercontroller userController = new Usercontroller();
             if (userController.CreateLecturerUser(lecturerName, newLecturerId, out string username, out string password))
             {
-                MessageBox.Show($"Lecturer added!\nUsername: {username}\nPassword: {password}");
+       
+         MessageBox.Show($"Lecturer added!\nUsername: {username}\nPassword: {password}");
             }
             else
             {
@@ -97,7 +98,6 @@ namespace UnicomTicManagement.Views
             LoadLectures();
             textLName.Text = "";
         }
-
         private void Delete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)

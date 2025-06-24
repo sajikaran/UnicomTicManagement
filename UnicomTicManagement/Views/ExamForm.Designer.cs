@@ -37,6 +37,7 @@
             this.dataGridExam = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExam)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(149, 155);
+            this.label1.Location = new System.Drawing.Point(154, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 0;
@@ -61,7 +62,7 @@
             // 
             // textEName
             // 
-            this.textEName.Location = new System.Drawing.Point(273, 159);
+            this.textEName.Location = new System.Drawing.Point(292, 68);
             this.textEName.Name = "textEName";
             this.textEName.Size = new System.Drawing.Size(299, 22);
             this.textEName.TabIndex = 2;
@@ -69,7 +70,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 228);
+            this.button1.Location = new System.Drawing.Point(48, 125);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 52);
             this.button1.TabIndex = 3;
@@ -79,7 +80,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 331);
+            this.button2.Location = new System.Drawing.Point(47, 234);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(86, 50);
             this.button2.TabIndex = 4;
@@ -101,7 +102,7 @@
             // 
             this.dataGridExam.BackgroundColor = System.Drawing.Color.White;
             this.dataGridExam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridExam.Location = new System.Drawing.Point(148, 228);
+            this.dataGridExam.Location = new System.Drawing.Point(159, 125);
             this.dataGridExam.Name = "dataGridExam";
             this.dataGridExam.RowHeadersWidth = 51;
             this.dataGridExam.RowTemplate.Height = 24;
@@ -113,7 +114,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(149, 70);
+            this.label3.Location = new System.Drawing.Point(154, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 29);
             this.label3.TabIndex = 7;
@@ -122,17 +123,27 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(268, 75);
+            this.comboBox1.Location = new System.Drawing.Point(292, 27);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(299, 24);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(58, 356);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 59);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Update";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // ExamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 530);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridExam);
@@ -163,5 +174,6 @@
         private System.Windows.Forms.DataGridView dataGridExam;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button4;
     }
 }
