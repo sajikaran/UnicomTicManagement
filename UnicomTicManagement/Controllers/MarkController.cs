@@ -9,7 +9,7 @@ using UnicomTicManagement.Models;
 
 namespace UnicomTicManagement.Controllers
 {
-    public   class MarkController
+    public class MarkController
     {
         public void AddMarks(Mark mark)
 
@@ -29,7 +29,7 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
-        public List<Mark>GetAllMarks()
+        public List<Mark> GetAllMarks()
         {
             var marks = new List<Mark>();
 
@@ -45,11 +45,11 @@ namespace UnicomTicManagement.Controllers
                     {
                         marks.Add(new Mark
                         {
-                            MId = reader.GetInt32(0),
-                            Marks = reader.GetInt32(1), 
-                            StId = reader.GetInt32(2),
-                            SuId = reader.GetInt32(3),
-                            ExId = reader.GetInt32(4)
+                            MId = Convert.ToInt32(reader["MId"]),
+                            Marks = Convert.ToInt32(reader["Marks"]),
+                            StId = Convert.ToInt32(reader["StId"]),
+                            SuId = Convert.ToInt32(reader["SuId"]),
+                            ExId = Convert.ToInt32(reader["ExId"])
                         });
                     }
                 }
@@ -59,8 +59,45 @@ namespace UnicomTicManagement.Controllers
         }
 
 
+
+
+
+        public void UpdateMark(Mark mark)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = "UPDATE Mark SET Marks = @Marks, StId = @StId, SuId = @SuId, ExId = @ExId WHERE MId = @MId";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Marks", mark.Marks);
+                    cmd.Parameters.AddWithValue("@StId", mark.StId);
+                    cmd.Parameters.AddWithValue("@SuId", mark.SuId);
+                    cmd.Parameters.AddWithValue("@ExId", mark.ExId);
+                    cmd.Parameters.AddWithValue("@MId", mark.MId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void DeleteMark(int markId)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = "DELETE FROM Mark WHERE MId = @MId";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MId", markId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
     }
 
-      
-    
+
+
 }

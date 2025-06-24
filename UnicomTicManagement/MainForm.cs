@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnicomTicManagement.Controllers;
+using UnicomTicManagement.Data;
 using UnicomTicManagement.Models;
 using UnicomTicManagement.Views;
 
@@ -31,106 +33,93 @@ namespace UnicomTicManagement
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-            StudentForm studentForm = new StudentForm();
-
-
-            studentForm.Show();
-
-            this.Hide();
-
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            CourseForm courseForm = new CourseForm();
-            courseForm.Show();
-            this.Hide();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            TimeTableForm time = new TimeTableForm();
-            time.Show();
-            this.Hide();
-
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-            SubjectForm subject = new SubjectForm(0); // Assuming 0 is a placeholder for CId, adjust as necessary
-            subject.Show();
-            this.Hide();
-        
-    
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            ExamForm examForm = new ExamForm();
-            examForm.Show();
-            this.Hide();
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+      
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            SubjectForm subject = new SubjectForm(0); // Assuming 0 is a placeholder for CId, adjust as necessary
-            subject.Show();
-            this.Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            StudentForm studentForm = new StudentForm();
-
-
-            studentForm.Show();
-
-            this.Hide();
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+  
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            RoomForm1cs room=new RoomForm1cs(); 
-            room.Show();
-            this.Hide();
+
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
-            CourseForm courseForm = new CourseForm();
-            courseForm.Show();
-            this.Hide();
+
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button1_Click_2(object sender, EventArgs e)
         {
-            ExamForm examForm = new ExamForm();
-            examForm.Show();
-            this.Hide();
+
+            string username = textBox3.Text.Trim();  // Get username from textbox3
+            string password = textBox2.Text.Trim();  // Get password from textbox2
+
+            // Step 2: Check if fields are empty
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter both username and password.");  // Show error message
+                return;  // Stop here if fields are empty
+            }
+
+            // Step 3: Open connection to your SQLite database
+            using (var connection = DataConnect.GetConnection())  // Call your custom method to get DB connection
+            {
+                connection.Open();  // Open the database connection
+
+                // Step 4: Write SQL query to find matching user
+                string query = @"
+            SELECT Role, StId
+            FROM Users
+            WHERE Username = @Username AND Password = @Password";  // Match user with correct password
+
+                // Step 5: Create the SQLite command with the SQL and connection
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    // Step 6: Add parameters to prevent SQL injection
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+
+                    // Step 7: Run the query and read the result
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())  // ✅ User found
+                        {
+                            string role = reader.GetString(0);  // Get the Role (Admin, Student, etc.)
+                            int? stId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1);  // Get Student ID if it's not null
+
+                            // Step 8: Show success message
+                            MessageBox.Show($"Login successful as {role}");
+
+                            // Step 9: Hide the login form
+                            this.Hide();
+
+                            // Step 10: Open the Main Dashboard and pass role + student ID
+                            MainDashbordForm dashboard = new MainDashbordForm(role, stId);
+                            dashboard.Show();
+                        }
+                        else
+                        {
+                            // ❌ No matching user found
+                            MessageBox.Show("Invalid username or password.");
+                        }
+                    }
+                }
+            }
+
+
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
-            TimeTableForm time = new TimeTableForm();
-            time.Show();
-            this.Hide();
+        }
 
+        private void textBox2_TextChanged_2(object sender, EventArgs e)
+        {
 
         }
     }

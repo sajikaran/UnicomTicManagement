@@ -73,7 +73,19 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
-
+        public void DeleteSubject(int subjectId)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = "DELETE FROM Subject WHERE SuId = @SuId";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SuId", subjectId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
 
     }

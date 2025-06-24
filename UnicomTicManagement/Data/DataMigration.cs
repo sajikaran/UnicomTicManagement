@@ -108,9 +108,33 @@ namespace UnicomTicManagement.Data
                                             FOREIGN KEY (ExId) REFERENCES Exam(ExId)
                                             );";
 
-                // ✅ THIS PART IS REQUIRED
+
                 SQLiteCommand createMarkCmd = new SQLiteCommand(createMarkTable, connection);
                 createMarkCmd.ExecuteNonQuery();
+
+
+
+                string UsersTable = @"
+                                         CREATE TABLE IF NOT EXISTS Users (
+                                         UserId INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        Username TEXT NOT NULL UNIQUE,
+                                          Password TEXT NOT NULL,
+                                          Role TEXT NOT NULL,
+                                          StId INTEGER
+                                            )";
+                SQLiteCommand createuserCmd = new SQLiteCommand(UsersTable, connection);
+                createuserCmd.ExecuteNonQuery();
+
+
+                string insertDefaultUsers = @"
+                                            INSERT OR IGNORE INTO Users (Username, Password, Role, StId) VALUES 
+                                            ('admin1', 'admin@123', 'Admin', NULL),
+                                            ('lect1', 'lect@123', 'Lecturer', NULL),
+                                            ('staff1', 'staff@123', 'Staff', NULL);";
+
+                SQLiteCommand InsertDefaultuserCmd= new SQLiteCommand(insertDefaultUsers, connection);
+                InsertDefaultuserCmd.ExecuteNonQuery();
+
 
             }
 

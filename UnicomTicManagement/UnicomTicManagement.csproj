@@ -53,11 +53,14 @@
   <ItemGroup>
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\LectureController.cs" />
     <Compile Include="Controllers\MarkController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
+    <Compile Include="Controllers\Usercontroller.cs" />
     <Compile Include="Data\DataMigration.cs" />
     <Compile Include="Data\DataConnect.cs" />
     <Compile Include="MainForm.cs">
@@ -68,16 +71,16 @@
     </Compile>
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\Lecturer.cs" />
     <Compile Include="Models\Mark.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\TimeTable.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\.Designer.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Views\CourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,11 +93,29 @@
     <Compile Include="Views\ExamForm.Designer.cs">
       <DependentUpon>ExamForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\LecturerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LecturerForm.Designer.cs">
+      <DependentUpon>LecturerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainDashbordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainDashbordForm.Designer.cs">
+      <DependentUpon>MainDashbordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoomForm1cs.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\RoomForm1cs.Designer.cs">
       <DependentUpon>RoomForm1cs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StaffForm.Designer.cs">
+      <DependentUpon>StaffForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SubjectForm.cs">
       <SubType>Form</SubType>
@@ -138,8 +159,17 @@
     <EmbeddedResource Include="Views\ExamForm.resx">
       <DependentUpon>ExamForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\LecturerForm.resx">
+      <DependentUpon>LecturerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainDashbordForm.resx">
+      <DependentUpon>MainDashbordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\RoomForm1cs.resx">
       <DependentUpon>RoomForm1cs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StaffForm.resx">
+      <DependentUpon>StaffForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SubjectForm.resx">
       <DependentUpon>SubjectForm.cs</DependentUpon>
@@ -153,7 +183,6 @@
     <EmbeddedResource Include="Views\TimeTableForm.resx">
       <DependentUpon>TimeTableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DataCollection.db" />
     <None Include="packages.config" />
     <None Include="Unicom TIC assignment Report\UniComTicStudents  Management.docx" />
     <None Include="Properties\Settings.settings">
@@ -165,6 +194,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="unicomtic.db" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

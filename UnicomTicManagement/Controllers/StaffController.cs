@@ -1,70 +1,67 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using UnicomTicManagement.Data;
 using UnicomTicManagement.Models;
 
 namespace UnicomTicManagement.Controllers
 {
-    public class CourseController
+    public class StaffController
     {
-        public void AddCourse(Course course)
+
+        public void AddStaff(  Staff staff)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "INSERT INTO Course (CName) VALUES (@CName)";
+                string query = "INSERT INTO Staff (StaffName) VALUES (@StaffName)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@CName", course.CName);
+                    cmd.Parameters.AddWithValue("@CName", staff.StaffName);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<Course> GetAllCourses()
+        public List<Staff> GetAllStaff()
         {
-            List<Course> courses = new List<Course>();
+            List<Staff> staff = new List<Staff>();
             using (var conn = DataConnect.GetConnection())
 
 
 
             {
                 conn.Open();
-                string query = "SELECT * FROM Course";
+                string query = "SELECT * FROM Staff";
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        courses.Add(new Course
+                        staff.Add(new Staff
                         {
-                            CId = reader.GetInt32(0),
-                            CName = reader.GetString(1)
+                            StaffId = reader.GetInt32(0),
+                            StaffName = reader.GetString(1)
                         });
                     }
                 }
             }
-            return courses;
+            return staff;
         }
 
-        public string GetCourseNameById(int cId)
+        public string GetStaffNameById(int StaffId)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "SELECT CName FROM Course WHERE CId = @CId";
+                string query = "SELECT StaffName FROM Staff WHERE StaffId = @StaffId";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@CId", cId);
+                    cmd.Parameters.AddWithValue("@StaffId", StaffId);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
@@ -76,34 +73,34 @@ namespace UnicomTicManagement.Controllers
             }
             return null; // Or return an empty string or a message like "Course not found"
         }
-        public void DeleteCourse(int cId)
+        public void DeleteCourse(int StaffId)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "DELETE FROM Course WHERE CId = @CId";
+                string query = "DELETE FROM Staff WHERE StaffId = @StaffId";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@CId", cId);
+                    cmd.Parameters.AddWithValue("@StaffId", StaffId);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
 
-        public void UpdateCourse(Course course)
+        public void UpdateCourse(Staff staff)
         {
             try
             {
                 using (var conn = DataConnect.GetConnection())
                 {
                     conn.Open();
-                    string query = "UPDATE Course SET CName = @CName WHERE CId = @CId";
+                    string query = "UPDATE Staff SET StaffName = @StaffName WHERE StaffId = @StaffId";
                     using (var cmd = new SQLiteCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@CName", course.CName);
-                        cmd.Parameters.AddWithValue("@CId", course.CId);
-                        cmd.ExecuteNonQuery(); // This was also missing
+                        cmd.Parameters.AddWithValue("@StaffName", staff.StaffName);
+                        cmd.Parameters.AddWithValue("@StaffId",staff.StaffId);
+                        cmd.ExecuteNonQuery(); 
                     }
                 }
             }
@@ -115,31 +112,5 @@ namespace UnicomTicManagement.Controllers
 
 
 
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

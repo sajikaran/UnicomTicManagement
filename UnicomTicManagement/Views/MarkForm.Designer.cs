@@ -55,7 +55,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(77, 221);
+            this.button1.Location = new System.Drawing.Point(12, 221);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 57);
             this.button1.TabIndex = 1;
@@ -65,21 +65,23 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(77, 294);
+            this.button2.Location = new System.Drawing.Point(12, 303);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 57);
+            this.button2.Size = new System.Drawing.Size(75, 57);
             this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
+            this.button2.Text = "Deleted";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(80, 381);
+            this.button3.Location = new System.Drawing.Point(12, 381);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 57);
+            this.button3.Size = new System.Drawing.Size(75, 57);
             this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
+            this.button3.Text = "upDate";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textMarks
             // 
@@ -91,12 +93,13 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(228, 221);
+            this.dataGridView1.Location = new System.Drawing.Point(119, 221);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(421, 217);
+            this.dataGridView1.Size = new System.Drawing.Size(399, 217);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -142,6 +145,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(302, 24);
             this.comboBox2.TabIndex = 10;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
             // 
@@ -155,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(801, 450);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);

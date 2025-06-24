@@ -58,8 +58,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(240, 130);
+            this.dataGridView1.Location = new System.Drawing.Point(229, 130);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -69,7 +70,7 @@
             // 
             // ADD
             // 
-            this.ADD.Location = new System.Drawing.Point(54, 130);
+            this.ADD.Location = new System.Drawing.Point(122, 130);
             this.ADD.Name = "ADD";
             this.ADD.Size = new System.Drawing.Size(75, 66);
             this.ADD.TabIndex = 3;
@@ -98,17 +99,17 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(54, 231);
+            this.button1.Location = new System.Drawing.Point(122, 237);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 68);
             this.button1.TabIndex = 6;
             this.button1.Text = "Remove";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(54, 374);
+            this.button2.Location = new System.Drawing.Point(122, 374);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 64);
             this.button2.TabIndex = 7;
@@ -120,7 +121,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(827, 536);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
@@ -129,6 +131,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textSubName);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SubjectForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.SubjectForm_Load);

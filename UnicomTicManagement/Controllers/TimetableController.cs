@@ -9,7 +9,7 @@ using UnicomTicManagement.Models;
 
 namespace UnicomTicManagement.Controllers
 {
-    public  class TimetableController
+    public class TimetableController
     {
         public void AddTimeSlot(TimeTable timeTable)
         {
@@ -49,5 +49,45 @@ namespace UnicomTicManagement.Controllers
             return timeTables;
         }
 
+
+
+
+
+        public void DeleteTimeSlot(int id)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = "DELETE FROM TimeTable WHERE TId = @id";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
+        public void UpdateTimeSlot(TimeTable timeTable)
+        {
+            using (var conn = DataConnect.GetConnection())
+            {
+                conn.Open();
+                string query = "UPDATE TimeTable SET TimeSlot = @TimeSlot WHERE TId = @TId";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TimeSlot", timeTable.TimeSlot);
+                    cmd.Parameters.AddWithValue("@TId", timeTable.TId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
     }
+
+
 }
+

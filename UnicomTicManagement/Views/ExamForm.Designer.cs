@@ -44,7 +44,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(116, 73);
+            this.label1.Location = new System.Drawing.Point(149, 155);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 0;
@@ -61,15 +61,15 @@
             // 
             // textEName
             // 
-            this.textEName.Location = new System.Drawing.Point(248, 73);
+            this.textEName.Location = new System.Drawing.Point(273, 159);
             this.textEName.Name = "textEName";
-            this.textEName.Size = new System.Drawing.Size(477, 22);
+            this.textEName.Size = new System.Drawing.Size(299, 22);
             this.textEName.TabIndex = 2;
             this.textEName.TextChanged += new System.EventHandler(this.textEName_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 125);
+            this.button1.Location = new System.Drawing.Point(16, 228);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 52);
             this.button1.TabIndex = 3;
@@ -79,7 +79,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 260);
+            this.button2.Location = new System.Drawing.Point(16, 331);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(86, 50);
             this.button2.TabIndex = 4;
@@ -89,7 +89,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 386);
+            this.button3.Location = new System.Drawing.Point(12, 466);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 52);
             this.button3.TabIndex = 5;
@@ -99,12 +99,13 @@
             // 
             // dataGridExam
             // 
+            this.dataGridExam.BackgroundColor = System.Drawing.Color.White;
             this.dataGridExam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridExam.Location = new System.Drawing.Point(123, 125);
+            this.dataGridExam.Location = new System.Drawing.Point(148, 228);
             this.dataGridExam.Name = "dataGridExam";
             this.dataGridExam.RowHeadersWidth = 51;
             this.dataGridExam.RowTemplate.Height = 24;
-            this.dataGridExam.Size = new System.Drawing.Size(602, 313);
+            this.dataGridExam.Size = new System.Drawing.Size(477, 290);
             this.dataGridExam.TabIndex = 6;
             this.dataGridExam.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridExam_CellContentClick);
             // 
@@ -112,7 +113,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(118, 20);
+            this.label3.Location = new System.Drawing.Point(149, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 29);
             this.label3.TabIndex = 7;
@@ -121,9 +122,9 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(248, 27);
+            this.comboBox1.Location = new System.Drawing.Point(268, 75);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(477, 24);
+            this.comboBox1.Size = new System.Drawing.Size(299, 24);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -131,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 530);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridExam);

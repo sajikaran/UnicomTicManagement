@@ -2,24 +2,39 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using UnicomTicManagement.Controllers;
+using UnicomTicManagement.Data;
 using UnicomTicManagement.Models;
+using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UnicomTicManagement.Views
 {
     public partial class StudentForm : Form
     {
+        private string _role;
+        private int? _studentId;
+
         public StudentForm()
         {
             InitializeComponent();
             LoadStudents();
             LoadCourses();
+
+            switch (_role)
+            {
+                case "Admin":
+
+                    break;
+
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -29,8 +44,6 @@ namespace UnicomTicManagement.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             string studentName = textStName.Text.Trim();
             string courseName = txtcompobox.Text.Trim();
 
@@ -42,18 +55,15 @@ namespace UnicomTicManagement.Views
 
             CourseController courseController = new CourseController();
             StudentController studentController = new StudentController();
+            Usercontroller usersController = new Usercontroller();
 
-            // Check if course already exists
+            
             Course existingCourse = courseController.GetAllCourses()
                 .FirstOrDefault(c => c.CName.Equals(courseName, StringComparison.OrdinalIgnoreCase));
 
-            // If not, insert the course
             if (existingCourse == null)
             {
-                Course newCourse = new Course { CName = courseName };
-                courseController.AddCourse(newCourse);
-
-                // Reload and get inserted course
+                courseController.AddCourse(new Course { CName = courseName });
                 existingCourse = courseController.GetAllCourses()
                     .FirstOrDefault(c => c.CName.Equals(courseName, StringComparison.OrdinalIgnoreCase));
 
@@ -64,21 +74,49 @@ namespace UnicomTicManagement.Views
                 }
             }
 
-            // Add student with course ID
+            
             Student newStudent = new Student
             {
                 StName = studentName,
                 CId = existingCourse.CId
             };
 
-            studentController.AddStudent(newStudent);
+            int newStudentId = studentController.AddStudentAndReturnId(newStudent);
+            if (newStudentId <= 0)
+            {
+                MessageBox.Show("Student insertion failed.");
+                return;
+            }
 
-            MessageBox.Show("Student added successfully.");
+            // Now call UsersController to create user
+            if (usersController.CreateStudentUser(studentName, newStudentId, out string username, out string password))
+            {
+                MessageBox.Show($"Student added!\nUsername: {username}\nPassword: {password}", "Success");
+                MessageBox.Show("Sucessfully Added Student");
+            }
+            else
+            {
+                MessageBox.Show("User account creation failed.");
+            }
 
             LoadStudents();
             textStName.Text = "";
             txtcompobox.Text = "";
+            LoadCourses();
         }
+
+    
+
+
+
+
+    
+
+
+
+
+
+
 
         private void txtcomobox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -98,16 +136,17 @@ namespace UnicomTicManagement.Views
             var students = studentController.GetAllStudents();
             var courses = courseController.GetAllCourses();
 
-            var studentDisplayList = (from student in students
-                                      join course in courses on student.CId equals course.CId
-                                      select new
-                                      {
-                                          ID = student.StId,
-                                          Name = student.StName,
-                                          Course = course.CName
-                                      }).ToList();
+
+            var studentDisplayList = students.Select(s => new
+            {
+                CourseID = s.CId,
+                ID = s.StId,
+                StudentName = s.StName
+            }).ToList();
 
             dataGridView1.DataSource = studentDisplayList;
+
+
         }
 
 

@@ -14,82 +14,84 @@ namespace UnicomTicManagement.Views
 {
     public partial class RoomForm1cs : Form
     {
+        private string _role;
+        private int? _studentId;
+
         public RoomForm1cs()
         {
+;
+           
+
+
             InitializeComponent();
             LoadRooms();
             LoadTimeSlots();
             LoadSubject();
+
+            switch (_role)
+            {
+                case "Admin":
+                    // Full access – no restrictions
+                    break;
+
+                case "Lecturer":
+                case "Staff":
+                   
+                    break;
+
+                case "Student":
+                    // Load only own marks and disable editing
+                    button1.Visible = false;
+                    button2.Visible = false;
+                    button3.Visible = false;
+                    comboBox2.Enabled = false; // prevent changing student
+                    comboBox1.Enabled = false; // You must define this method
+                    break;
+            }
+
         }
+
+        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string RoomName = textRoom.Text.Trim();
-            string TimeSlot = comboBox1.Text.Trim();
-            string SubjectName = comboBox2.Text.Trim();
+            string roomName = textRoom.Text.Trim();
 
-            // ✅ Validate input
-            if (string.IsNullOrWhiteSpace(RoomName) ||
-                string.IsNullOrWhiteSpace(TimeSlot) ||
-                string.IsNullOrWhiteSpace(SubjectName))
+            if (string.IsNullOrWhiteSpace(roomName) ||
+                comboBox2.SelectedValue == null ||
+                comboBox1.SelectedValue == null)
             {
-                MessageBox.Show("Please enter Room Name, Time Slot, and Subject.");
+                MessageBox.Show("Please fill all fields.");
                 return;
             }
 
-            // ✅ Initialize controllers
-            TimetableController timeController = new TimetableController();
-            SubjectController subjectController = new SubjectController();
-            RoomController roomController = new RoomController();
-
-            // ✅ Get matching TimeSlot
-            TimeTable existingCourse = timeController.GetAllTimeSlots()
-                .FirstOrDefault(t => t.TimeSlot.Equals(TimeSlot, StringComparison.OrdinalIgnoreCase));
-
-            // ✅ Get matching Subject
-            Subject existingSubject = subjectController.GetAllSubjects()
-                .FirstOrDefault(s => s.SuName.Equals(SubjectName, StringComparison.OrdinalIgnoreCase));
-
-            if (existingCourse == null || existingSubject == null)
-            {
-                MessageBox.Show("Selected Time Slot or Subject is invalid.");
-                return;
-            }
-
-            // ✅ Create Room object
             Room newRoom = new Room
             {
-                RName = RoomName,
-                TId = existingCourse.TId,
-                SuId = existingSubject.SuId
+                RName = roomName,
+                SuId = Convert.ToInt32(comboBox2.SelectedValue),
+                TId = Convert.ToInt32(comboBox1.SelectedValue)
             };
 
-            try
-            {
-                // ✅ Add to database
-                roomController.AddRoom(newRoom);
-                MessageBox.Show("Room added successfully!");
+            RoomController controller = new RoomController();
+            controller.AddRoom(newRoom);
 
-                // ✅ Refresh form (if applicable)
-                LoadTimeSlots();
-                LoadRooms();
-                LoadSubject();
+            MessageBox.Show("Room added successfully!");
 
-                // ✅ Clear inputs
-                textRoom.Text = "";
-                comboBox1.SelectedIndex = -1;
-                comboBox2.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error adding room: " + ex.Message);
-            }
+            LoadRooms();
+            textRoom.Clear();
+            comboBox2.Text = "";
+            comboBox1.Text = "";
         }
+
+        
         private void LoadTimeSlots()
         {
             TimetableController timeController = new TimetableController();
@@ -114,11 +116,15 @@ namespace UnicomTicManagement.Views
             // Display basic Room info
             var roomDisplayList = rooms.Select(r => new
             {
+                SuID = r.SuId,
+                TID = r.TId,
                 RoomID = r.RId,
-                RoomName = r.RName,
-
-                // Optional: add timetable info if needed
+                RoomName = r.RName
             }).ToList();
+
+
+     
+
 
             dataGridView1.DataSource = roomDisplayList;
         }
@@ -146,6 +152,61 @@ namespace UnicomTicManagement.Views
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a room to update.");
+                return;
+            }
+
+            int roomId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["RoomID"].Value);
+            string roomName = textRoom.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(roomName))
+            {
+                MessageBox.Show("Please enter a room name.");
+                return;
+            }
+
+            Room updatedRoom = new Room
+            {
+                RId = roomId,
+                RName = roomName,
+                SuId = Convert.ToInt32(comboBox2.SelectedValue),
+                TId = Convert.ToInt32(comboBox1.SelectedValue)
+            };
+
+            RoomController controller = new RoomController();
+            controller.UpdateRoom(updatedRoom);
+
+            MessageBox.Show("Room updated successfully!");
+            LoadRooms();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var row = dataGridView1.SelectedRows[0];
+
+                textRoom.Text = row.Cells["RoomName"].Value.ToString();
+                comboBox2.SelectedValue = Convert.ToInt32(row.Cells["SubjectID"].Value);
+                comboBox1.SelectedValue = Convert.ToInt32(row.Cells["TimeTableID"].Value);
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textRoom_TextChanged(object sender, EventArgs e)
         {
 
         }

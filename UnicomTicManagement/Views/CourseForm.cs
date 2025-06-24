@@ -135,41 +135,54 @@ namespace UnicomTicManagement.Views
         }
 
         private void button3_Click(object sender, EventArgs e)
-        
-        { if (dgvCourses.SelectedRows.Count == 0)
-           
+
+        {
+            if (dgvCourses.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a course to update.");
                 return;
             }
 
-            string newCourseName = txtCourseName.Text.Trim();
-            if (string.IsNullOrEmpty(newCourseName))
+            string updatedName = textCName.Text.Trim();
+
+            if (string.IsNullOrEmpty(updatedName))
             {
                 MessageBox.Show("Course name cannot be empty.");
                 return;
             }
 
-            int courseId = Convert.ToInt32(dgvCourses.SelectedRows[0].Cells["CId"].Value);
+            // ✅ Get selected Course ID from DataGridView
+            int selectedCourseId = Convert.ToInt32(dgvCourses.SelectedRows[0].Cells["CId"].Value);
+
+            CourseController courseController = new CourseController();
+            Course course = new Course
+            {
+                CId = selectedCourseId,     // ✅ You must include the course ID for update
+                CName = updatedName
+            };
 
             try
             {
-                CourseController controller = new CourseController();
-                controller.UpdateCourse(courseId, newCourseName);
+                courseController.UpdateCourse(course);
                 MessageBox.Show("Course updated successfully.");
-                LoadCourses();
-                textCName.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error updating course: " + ex.Message);
             }
-        }
 
+            
+            LoadCourses();
+            textCName.Clear();
+             
+
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             
+
         }
+
     }
 
 }

@@ -9,7 +9,7 @@ namespace UnicomTicManagement.Data
 {
     public static class DataConnect
     {
-        private static string connecter = "Data Source=DataCollection.db";
+        private static string connecter = "Data Source=unicomtic.db";
             
 
         public static SQLiteConnection GetConnection()

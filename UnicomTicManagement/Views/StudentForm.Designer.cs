@@ -42,9 +42,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 63);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(142, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.Size = new System.Drawing.Size(106, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "StName";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -52,16 +53,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 140);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(133, 87);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 16);
+            this.label2.Size = new System.Drawing.Size(100, 29);
             this.label2.TabIndex = 1;
             this.label2.Text = "CName";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textStName
             // 
-            this.textStName.Location = new System.Drawing.Point(105, 57);
+            this.textStName.Location = new System.Drawing.Point(272, 34);
             this.textStName.Name = "textStName";
             this.textStName.Size = new System.Drawing.Size(117, 22);
             this.textStName.TabIndex = 3;
@@ -69,9 +71,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(281, 364);
+            this.button1.Location = new System.Drawing.Point(30, 141);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 74);
+            this.button1.Size = new System.Drawing.Size(75, 62);
             this.button1.TabIndex = 4;
             this.button1.Text = "ADD";
             this.button1.UseVisualStyleBackColor = true;
@@ -79,20 +81,21 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(253, 6);
+            this.dataGridView1.Location = new System.Drawing.Point(138, 141);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(535, 291);
+            this.dataGridView1.Size = new System.Drawing.Size(484, 297);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(378, 364);
+            this.button2.Location = new System.Drawing.Point(30, 249);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 74);
+            this.button2.Size = new System.Drawing.Size(75, 62);
             this.button2.TabIndex = 7;
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
@@ -101,7 +104,7 @@
             // txtcompobox
             // 
             this.txtcompobox.FormattingEnabled = true;
-            this.txtcompobox.Location = new System.Drawing.Point(105, 132);
+            this.txtcompobox.Location = new System.Drawing.Point(272, 94);
             this.txtcompobox.Name = "txtcompobox";
             this.txtcompobox.Size = new System.Drawing.Size(117, 24);
             this.txtcompobox.TabIndex = 6;
@@ -109,9 +112,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(475, 364);
+            this.button3.Location = new System.Drawing.Point(30, 363);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 74);
+            this.button3.Size = new System.Drawing.Size(75, 62);
             this.button3.TabIndex = 8;
             this.button3.Text = "UPdate";
             this.button3.UseVisualStyleBackColor = true;
@@ -121,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 505);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtcompobox);
@@ -130,6 +133,7 @@
             this.Controls.Add(this.textStName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StudentForm";
             this.Text = "StudentForm";
             this.Load += new System.EventHandler(this.StudentForm_Load);

@@ -1,52 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using UnicomTicManagement.Data;
 using UnicomTicManagement.Models;
-using static System.Resources.ResXFileRef;
 
 namespace UnicomTicManagement.Controllers
-    ///Student Name Add method////////
 {
-    public class StudentController
+    public class LectureController
     {
 
-        public void AddStudent(Student student)
+        public void AddLecture(Lecturer lect)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "INSERT INTO Student (StName, CId) VALUES (@StName, @CId)";
+                string query = "INSERT INTO Lecturer (LName, SuId) VALUES (@LNmae, @SuId)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
 
-                    cmd.Parameters.AddWithValue("@StName", student.StName);
-                    cmd.Parameters.AddWithValue("@CId", student.CId);
+                    cmd.Parameters.AddWithValue("@LName", lect.LName);
+                    cmd.Parameters.AddWithValue("@SuId", lect.SuId);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
 
-        public int AddStudentAndReturnId(Student student)
+        public int AddLecturerAndReturnId(Lecturer lect)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
                 string query = @"
-                INSERT INTO Student (StName, CId)
-                VALUES (@StName, @CId);
+                INSERT INTO Lecturer (LName, SuId)
+                VALUES (@LName, @SuId);
                 SELECT last_insert_rowid();"; // gets the auto-increment ID
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@StName", student.StName);
-                    cmd.Parameters.AddWithValue("@CId", student.CId);
+                    cmd.Parameters.AddWithValue("@LName", lect.LName);
+                    cmd.Parameters.AddWithValue("@SuId", lect.SuId);
 
                     object result = cmd.ExecuteScalar();
                     return Convert.ToInt32(result);
@@ -56,26 +52,26 @@ namespace UnicomTicManagement.Controllers
 
 
 
-        public List<Student> GetAllStudents()
+        public List<Lecturer> GetAllLecturers()
         {
-            List<Student> students = new List<Student>();
+            List<Lecturer> students = new List<Lecturer>();
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
                 string query = @"
-                            SELECT StId, StName, CId
-                            From Student";
+                            SELECT LId, LName, SuId
+                            From Lecturer";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        students.Add(new Student
+                        students.Add(new Lecturer
                         {
-                            StId = reader.GetInt32(0),
-                            StName = reader.GetString(1),
-                            CId = reader.GetInt32(2)
+                            LId = reader.GetInt32(0),
+                            LName = reader.GetString(1),
+                            SuId = reader.GetInt32(2)
                         });
                     }
                 }
@@ -83,15 +79,15 @@ namespace UnicomTicManagement.Controllers
             return students;
         }
 
-        public void DeleteStudent(int StId)
+        public void DeleteLecturer(int LId)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "DELETE FROM Student WHERE StId = @StId";
+                string query = "DELETE FROM Lecturer WHERE LId = @LId";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@StId", StId);
+                    cmd.Parameters.AddWithValue("@LId", LId);
                     cmd.ExecuteNonQuery();
                 }
 
@@ -99,21 +95,21 @@ namespace UnicomTicManagement.Controllers
             }
         }
 
-        public void UpdateStudent(Student student)
+        public void UpdateLecturer(Lecturer lect)
         {
             using (var conn = DataConnect.GetConnection())
             {
                 conn.Open();
-                string query = "UPDATE Student SET StName = @StName, CId = @CId WHERE StId = @StId";
+                string query = "UPDATE  Lecturer SET StName = @LName, SuId = @SuId WHERE LId = @LId";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@StName", student.StName);
-                    cmd.Parameters.AddWithValue("@CId", student.CId);
-                    cmd.Parameters.AddWithValue("@StId", student.StId);
+                    cmd.Parameters.AddWithValue("@StName", lect.LName);
+                    cmd.Parameters.AddWithValue("@SuId", lect.SuId);
+                    cmd.Parameters.AddWithValue("@LId", lect.LId);
                     cmd.ExecuteNonQuery();
                 }
             }
-        }           
+        }
 
     }
 
@@ -128,4 +124,7 @@ namespace UnicomTicManagement.Controllers
 
 
 
+
+
+    
 

@@ -95,9 +95,10 @@ namespace UnicomTicManagement.Views
             // Display only necessary fields
             var examDisplayList = exams.Select(e => new
             {
+                SubjectID = e.SuId,
                 ID = e.ExId,
-                ExamName = e.ExName,
-                SubjectID = e.SuId
+                ExamName = e.ExName
+                
             }).ToList();
 
             dataGridExam.DataSource = examDisplayList;
@@ -138,47 +139,92 @@ namespace UnicomTicManagement.Views
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (dataGridExam.SelectedRows.Count > 0)
-            {
-                int selectedId = Convert.ToInt32(dataGridExam.SelectedRows[0].Cells["ExId"].Value);
-                ExamController examController = new ExamController();
-                examController.DeleteExam(selectedId);
-
-                MessageBox.Show("Exam deleted successfully.");
-                LoadExam();
-            }
-            else
+            if (dataGridExam.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select an exam to delete.");
+                return;
             }
 
+            int selectedExamId = Convert.ToInt32(dataGridExam.SelectedRows[0].Cells["ID"].Value);
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this exam?", "Confirm Delete", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                ExamController examController = new ExamController();
+                examController.DeleteExam(selectedExamId);
+
+                MessageBox.Show("Exam deleted successfully!");
+
+                LoadExam();
+                textEName.Clear();
+                comboBox1.Text = "";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataGridExam.SelectedRows.Count == 0)
-
-                {
-                    MessageBox.Show("Please select an exam to update.");
+            {
+                MessageBox.Show("Please select an exam to update.");
                 return;
             }
 
-            string updatedName = textEName.Text.Trim();
+            // Get new exam name
+            string updatedExamName = textEName.Text.Trim();
+            string selectedSubjectName = comboBox1.Text.Trim(); // Assuming comboBox1 holds subject names
 
-
-            ExamController examController = new ExamController();
-            Exam exam = new Exam
+            if (string.IsNullOrWhiteSpace(updatedExamName) || string.IsNullOrWhiteSpace(selectedSubjectName))
             {
+                MessageBox.Show("Please enter both Exam Name and Subject.");
+                return;
+            }
 
-                ExName = updatedName
+            // Get selected exam ID from grid
+            int selectedExamId = Convert.ToInt32(dataGridExam.SelectedRows[0].Cells["ID"].Value); // Ensure column name is "ID"
+
+            // Initialize controllers
+            SubjectController subjectController = new SubjectController();
+            ExamController examController = new ExamController();
+
+            // Get or create the subject
+            Subject existingSubject = subjectController.GetAllSubjects()
+                .FirstOrDefault(s => s.SuName.Equals(selectedSubjectName, StringComparison.OrdinalIgnoreCase));
+
+            if (existingSubject == null)
+            {
+                // Create new subject
+                Subject newSubject = new Subject { SuName = selectedSubjectName };
+
+                subjectController.AddSubject(newSubject);
+
+                // Try to retrieve it again
+                existingSubject = subjectController.GetAllSubjects()
+                    .FirstOrDefault(s => s.SuName.Equals(selectedSubjectName, StringComparison.OrdinalIgnoreCase));
+
+                if (existingSubject == null)
+                {
+                    MessageBox.Show("Failed to insert or retrieve subject.");
+                    return;
+                }
+            }
+
+            // Create exam object for update
+            Exam updatedExam = new Exam
+            {
+                ExId = selectedExamId,
+                ExName = updatedExamName,
+                SuId = existingSubject.SuId // Assuming exam is linked to subject by SuId
             };
-            examController.UpdateExam(exam);
 
-            MessageBox.Show("Exam updated successfully.");
+            // Call the update method
+            examController.UpdateExam(updatedExam);
 
+            MessageBox.Show("Exam updated successfully!");
 
+            // Refresh exam list and clear fields
             LoadExam();
             textEName.Clear();
+            comboBox1.Text = "";
 
         }
 
