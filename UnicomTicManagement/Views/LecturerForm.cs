@@ -31,11 +31,10 @@ namespace UnicomTicManagement.Views
         private void LoadLectures()
         {
             LectureController lectureController = new LectureController();
-            SubjectController subjectcontroller = new SubjectController();
+            SubjectController subjectController = new SubjectController();
 
-            var lectures = LectureController.GetAllLecturers();
-            var subjects = SubjectController.GetAllSubjects()
-
+            var lectures = lectureController.GetAllLecturers();
+            var subjects = subjectController.GetAllSubjects();  
 
             var lectDisplayList = lectures.Select(l => new
             {
@@ -45,8 +44,6 @@ namespace UnicomTicManagement.Views
             }).ToList();
 
             dataGridView1.DataSource = lectDisplayList;
-
-
         }
 
 
@@ -105,19 +102,19 @@ namespace UnicomTicManagement.Views
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Get the selected StId from the first selected row
+                
                 int selectedLId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["LId"].Value);
 
-                // Optional: Confirm before delete
+              
                 var confirmResult = MessageBox.Show("Are you sure to delete this lecture ?", "Confirm Delete", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Call the delete method from StudentController
+                    
                     StudentController controller = new StudentController();
                     controller.DeleteStudent(selectedLId);
 
-                    // Refresh the DataGridView
-                    LoadLectures(); // Make sure you have a method that reloads the data
+                    
+                    LoadLectures(); 
                 }
             }
             else
